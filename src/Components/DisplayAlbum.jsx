@@ -13,7 +13,7 @@ const DisplayAlbum = () => {
   const [likes, setLikes] = useState(0);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
-  const url = "http://localhost:4000";
+  const url = import.meta.env.VITE_APP_BACKEND_URL || 'http://localhost:4000';
 
   useEffect(() => {
     const album = albumsData.find((item) => item._id.toString() === id);

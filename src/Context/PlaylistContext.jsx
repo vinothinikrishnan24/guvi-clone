@@ -5,7 +5,7 @@ export const PlaylistContext = createContext();
 
 const PlaylistContextProvider = (props) => {
   const [playlists, setPlaylists] = useState([]);
-  const url = "http://localhost:4000";
+  const url = import.meta.env.VITE_APP_BACKEND_URL || 'http://localhost:4000';
 
   const createPlaylist = async (name, desc) => {
     try {

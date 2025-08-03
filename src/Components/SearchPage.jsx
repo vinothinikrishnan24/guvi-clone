@@ -12,7 +12,7 @@ const SearchPage = () => {
   const [filterType, setFilterType] = useState("name");
   const [filteredSongs, setFilteredSongs] = useState([]);
   const [filteredAlbums, setFilteredAlbums] = useState([]);
-  const url = "http://localhost:4000";
+  const url = import.meta.env.VITE_APP_BACKEND_URL || 'http://localhost:4000';
 
   useEffect(() => {
     const fetchSearchResults = async () => {
