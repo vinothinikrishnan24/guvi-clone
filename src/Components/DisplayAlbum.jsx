@@ -33,14 +33,25 @@ const DisplayAlbum = () => {
     fetchInteractions();
   }, [id, albumsData]);
 
-  const handleDownload = (songUrl, songName) => {
+const handleDownload = async (songUrl, songName) => {
+  try {
+    const response = await fetch(songUrl);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch: ${response.statusText}`);
+    }
+    const blob = await response.blob();
+    const blobUrl = window.URL.createObjectURL(blob);
     const link = document.createElement("a");
-    link.href = songUrl;
+    link.href = blobUrl;
     link.download = `${songName}.mp3`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  };
+    window.URL.revokeObjectURL(blobUrl);
+  } catch (error) {
+    console.error("Download failed:", error);
+  }
+};
 
   const handleLike = async () => {
     try {
